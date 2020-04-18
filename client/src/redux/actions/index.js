@@ -7,8 +7,9 @@ export const addTask = (details) => {
     axios.post('/add_task', details)
       .then(function (response) {
         console.log(response);
-        Swal.fire('Tasks Added !')
         dispatch({type:POSTDATA,payload:response.data})
+        Swal.fire('Tasks Added !').then(()=>window.location.reload())
+
       })
       .catch(function (error) {
         Swal.fire('Error in adding to database')

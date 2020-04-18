@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import axios from "axios";
+import Swal from 'sweetalert2'
 import { addTask } from "../redux/actions/index";
 import { getTask } from "../redux/actions/index";
 class Form extends Component {
@@ -23,6 +24,8 @@ class Form extends Component {
           <div key={item._id}>
             <h5>Task Name - {item.taskName}</h5>
             <p>Task Description - {item.taskDescription}</p>
+            <p>Task Creator - {item.taskCreator}</p>
+            <br/><br/>
           </div>
         );
       });
@@ -33,6 +36,11 @@ class Form extends Component {
     this.props.getTask();
   };
   handleSubmit = () => {
+  if(this.state.taskName.length==0) return Swal.fire('Task Name cannot be empty')
+  else if(this.state.taskDescription.length==0) return Swal.fire('Task Description cannot be empty')
+  else if(this.state.taskCreator.length==0) return Swal.fire('Task Creator cannot be empty')
+  else if(this.state.taskDuration.length==0) return Swal.fire('Task Duration cannot be empty')
+    // this.setState({taskName:''})
     this.props.addTask(this.state);
   };
   render() {
@@ -44,7 +52,6 @@ class Form extends Component {
           <h2 className=" ">Pomodoro Tasks</h2>
           <button className="btn btn-primary" onClick={()=>window.location.reload()}>Refresh</button>
         </div>
-        <form>
         <div className="form-group ">
           <label>Task Name</label>
           <input
@@ -70,16 +77,15 @@ class Form extends Component {
           />
         </div>
         <div className="form-group">
-          <label>Duration</label>
+          <label>Duration (in minutes)</label>
           <input
-            type="text"
+            type="number"
             className="form-control"
             onChange={(e) => this.setState({ taskDuration: e.target.value })}
           />
         </div>
-        </form>
 
-        <button type="submit" className="btn btn-primary" onClick={(e) => this.handleSubmit(e)}>
+        <button type="submit" className="btn btn-primary" onClick={()=>this.handleSubmit()}>
           Submit
         </button>
 
