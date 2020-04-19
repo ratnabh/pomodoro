@@ -40,8 +40,15 @@ class Form extends Component {
   else if(this.state.taskDescription.length==0) return Swal.fire('Task Description cannot be empty')
   else if(this.state.taskCreator.length==0) return Swal.fire('Task Creator cannot be empty')
   else if(this.state.taskDuration.length==0) return Swal.fire('Task Duration cannot be empty')
+     let details = {
+      taskName: this.state.taskName,
+      taskDescription: this.state.taskDescription,
+      taskCreator: this.state.taskCreator,
+      taskDuration: this.state.taskDuration,
+    };
+    this.setState({ taskName: "",taskDescription:'',taskCreator:'',taskDuration:'' });
     // this.setState({taskName:''})
-    this.props.addTask(this.state);
+    this.props.addTask(details);
   };
   render() {
     console.log(this.props.tasks);
@@ -56,6 +63,7 @@ class Form extends Component {
           <label>Task Name</label>
           <input
             type="text"
+            value={this.state.taskName}
             className="form-control"
             onChange={(e) => this.setState({ taskName: e.target.value })}
           />
@@ -64,6 +72,7 @@ class Form extends Component {
           <label>Task Description</label>
           <input
             type="text"
+            value={this.state.taskDescription}
             className="form-control"
             onChange={(e) => this.setState({ taskDescription: e.target.value })}
           />
@@ -72,6 +81,7 @@ class Form extends Component {
           <label>Creator</label>
           <input
             type="text"
+            value={this.state.taskCreator}
             className="form-control"
             onChange={(e) => this.setState({ taskCreator: e.target.value })}
           />
@@ -80,6 +90,7 @@ class Form extends Component {
           <label>Duration (in minutes)</label>
           <input
             type="number"
+            value={this.state.taskDuration}
             className="form-control"
             onChange={(e) => this.setState({ taskDuration: e.target.value })}
           />
