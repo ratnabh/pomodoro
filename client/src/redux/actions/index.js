@@ -8,7 +8,7 @@ export const addTask = (details) => {
       .then(function (response) {
         console.log(response);
         dispatch({type:POSTDATA,payload:response.data})
-        Swal.fire('Tasks Added !').then(()=>window.location.reload())
+        Swal.fire('Tasks Added !')
 
       })
       .catch(function (error) {
