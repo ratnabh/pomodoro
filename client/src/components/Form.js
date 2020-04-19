@@ -57,7 +57,7 @@ class Form extends Component {
         <div className="d-flex justify-content-between align-items-center">
           {" "}
           <h2 className=" ">Pomodoro Tasks</h2>
-          <button className="btn btn-primary" onClick={()=>window.location.reload()}>Refresh</button>
+          <button className="btn btn-primary" onClick={()=>this.props.getTask()}>Refresh</button>
         </div>
         <div className="form-group ">
           <label>Task Name</label>
